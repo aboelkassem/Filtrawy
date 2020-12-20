@@ -16,7 +16,8 @@ if not os.path.exists(path):
     os.makedirs(path)
 
 # create a dictionary for the filters
-fil = ['color', 'gray', 'gauss', 'sobel', 'laplace', 'threshold']
+fil = ['color', 'gray', 'gauss', 'sobel', 'laplace', 'threshold', 'median', 'average', 'unsharp', 'logTransformation',
+       'negativeEnhancement', 'powerLowEnhancement']
 filter_dic = {}
 
 
@@ -58,24 +59,42 @@ class App:
         self.b2 = tkinter.Button(window, text="Laplace", width=15, command=self.laplace_filter)
         self.b2.grid(row=4, column=17)
 
-        self.b4 = tkinter.Button(window, text="Threshold", width=15, command=self.threshold_filter)
-        self.b4.grid(row=6, column=17)
+        self.b3 = tkinter.Button(window, text="Threshold", width=15, command=self.threshold_filter)
+        self.b3.grid(row=6, column=17)
 
         # note, add sobel filters to the same button, multiple clicks
-        self.b5 = tkinter.Button(window, text="Sobel", width=15, command=self.sobel_filter)
-        self.b5.grid(row=6, column=13)
+        self.b4 = tkinter.Button(window, text="Sobel", width=15, command=self.sobel_filter)
+        self.b4.grid(row=6, column=13)
 
-        self.b7 = tkinter.Button(window, text="Gray", width=15, command=self.gray_filter)
-        self.b7.grid(row=8, column=13)
+        self.b5 = tkinter.Button(window, text="Gray", width=15, command=self.gray_filter)
+        self.b5.grid(row=8, column=13)
+
+        self.b6 = tkinter.Button(window, text="Median", width=15, command=self.median_filter)
+        self.b6.grid(row=8, column=17)
+
+        self.b7 = tkinter.Button(window, text="Average", width=15, command=self.average_filter)
+        self.b7.grid(row=9, column=13)
 
         self.b8 = tkinter.Button(window, text="Color/No Filter", width=15, command=self.no_filter)
         self.b8.grid(row=9, column=17)
 
-        self.b9 = tkinter.Button(window, text="Snap or Save image", height=4, command=self.snapshot)
-        self.b9.grid(row=11, rowspan=2, column=13, columnspan=4)
+        self.b9 = tkinter.Button(window, text="Unsharp", width=15, command=self.unsharp_filter)
+        self.b9.grid(row=10, column=13)
 
-        self.b10 = tkinter.Button(window, text="Close Program", command=window.destroy)
-        self.b10.grid(row=12, rowspan=2, column=17, columnspan=2)
+        self.b10 = tkinter.Button(window, text="LogTrans...", width=15, command=self.logTransformation)
+        self.b10.grid(row=10, column=17)
+
+        self.b10 = tkinter.Button(window, text="NegativeEnhanc...", width=15, command=self.negativeEnhancement)
+        self.b10.grid(row=11, column=13)
+
+        self.b10 = tkinter.Button(window, text="PowerLowEnhanc...", width=15, command=self.powerLowEnhancement)
+        self.b10.grid(row=12, column=13)
+
+        self.b11 = tkinter.Button(window, text="Snap or Save image", width=15, command=self.snapshot)
+        self.b11.grid(row=14, rowspan=2, column=13, columnspan=4)
+
+        self.b12 = tkinter.Button(window, text="Close Program", command=window.destroy)
+        self.b12.grid(row=14, rowspan=2, column=17, columnspan=2)
 
         # After	it is called once, the update method will be automatically called every loop
         self.delay = 15
@@ -152,6 +171,47 @@ class App:
         elif self.isVideoInstantiated:
             self.vid.all_filters = select_filter('blue', True)
 
+    def median_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('median', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('median', True)
+
+    def average_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('average', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('average', True)
+
+    def unsharp_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('unsharp', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('unsharp', True)
+
+    def logTransformation(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('logTransformation', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('logTransformation', True)
+
+    def negativeEnhancement(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('negativeEnhancement', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('negativeEnhancement', True)
+
+    def powerLowEnhancement(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('powerLowEnhancement', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('powerLowEnhancement', True)
 
 # Create a window and pass it to the Application object
 App(tkinter.Tk(), 'Filterawy')

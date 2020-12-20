@@ -62,6 +62,15 @@ class VideoCap:
         elif self.all_filters['threshold']:
             frame = cv2.threshold(cv2.absdiff(frame1, gray), 30, 255, cv2.THRESH_BINARY)[1]
 
+#-------------------------------------------------------------------------------------------------
+        elif self.all_filters['median']:
+            frame = cv2.medianBlur(self.frame, 5)
+        elif self.all_filters['average']:
+            frame = cv2.blur(self.frame, (5, 5))
+        elif self.all_filters['unsharp']:
+            gaussian = cv2.GaussianBlur(self.frame, (0, 0), 2.0)
+            frame = cv2.addWeighted(self.frame, 1.0 + 3.0, gaussian, -3.0, 0)
+
         if ret:
             self.frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
             self.photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(self.frame))
