@@ -17,7 +17,7 @@ if not os.path.exists(path):
 
 # create a dictionary for the filters
 fil = ['color', 'gray', 'threshold', 'increaseContrast', 'decreaseContrast', 'logTransformation', 'powerLowEnhancement',
-       'negativeEnhancement', 'gauss', 'sobel', 'laplace', 'min', 'max', 'median', 'average', 'unsharp', 'resizeImage', 'permitt',
+       'negativeEnhancement', 'gauss', 'sobel', 'laplace', 'min', 'max', 'median', 'average', 'unsharp', 'prewitt',
        'histogramEqualization']
 filter_dic = {}
 
@@ -94,14 +94,23 @@ class App:
         self.b13 = tkinter.Button(window, text="NegativeEnhanc...", width=15, command=self.negativeEnhancement)
         self.b13.grid(row=11, column=13)
 
-        self.b14 = tkinter.Button(window, text="PowerLowEnhanc...", width=15, command=self.powerLowEnhancement)
+        self.b14 = tkinter.Button(window, text="Min filter", width=15, command=self.min_filter)
+        self.b14.grid(row=12, column=13)
+
+        self.b14 = tkinter.Button(window, text="Max filter", width=15, command=self.max_filter)
+        self.b14.grid(row=12, column=17)
+
+        self.b14 = tkinter.Button(window, text="Prewitt", width=15, command=self.prewitt_filter)
         self.b14.grid(row=11, column=17)
 
+        self.b14 = tkinter.Button(window, text="Histogram Equalization", width=15, command=self.histogram_filter)
+        self.b14.grid(row=13, column=17, columnspan=2)
+
         self.b15 = tkinter.Button(window, text="Snap or Save image", width=15, command=self.snapshot)
-        self.b15.grid(row=14, rowspan=2, column=13, columnspan=4)
+        self.b15.grid(row=15, rowspan=2, column=13, columnspan=4)
 
         self.b16 = tkinter.Button(window, text="Close Program", command=window.destroy)
-        self.b16.grid(row=14, rowspan=2, column=17, columnspan=2)
+        self.b16.grid(row=15, rowspan=2, column=17, columnspan=2)
 
         # After	it is called once, the update method will be automatically called every loop
         self.delay = 15
@@ -228,6 +237,41 @@ class App:
             self.img.update()
         elif self.isVideoInstantiated:
             self.vid.all_filters = select_filter('decreaseContrast', True)
+
+    def decreaseContrast_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('decreaseContrast', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('decreaseContrast', True)
+
+    def min_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('min', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('min', True)
+
+    def max_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('max', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('max', True)
+
+    def prewitt_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('prewitt', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('prewitt', True)
+
+    def histogram_filter(self):
+        if self.isImageInstantiated:
+            self.img.all_filters = select_filter('histogramEqualization', True)
+            self.img.update()
+        elif self.isVideoInstantiated:
+            self.vid.all_filters = select_filter('histogramEqualization', True)
 
 # Create a window and pass it to the Application object
 App(tkinter.Tk(), 'Filterawy')

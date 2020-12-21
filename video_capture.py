@@ -99,6 +99,33 @@ class VideoCap:
         elif self.all_filters['decreaseContrast']:
             frame = cv2.addWeighted(frame, 0.8, frame, 0, -10)
 
+        elif self.all_filters['min']:
+            size = (3, 3)
+            shape = cv2.MORPH_RECT
+            kernel = cv2.getStructuringElement(shape, size)
+            frame = cv2.erode(color, kernel)
+            pass
+
+        elif self.all_filters['max']:
+            size = (3, 3)
+            shape = cv2.MORPH_RECT
+            kernel = cv2.getStructuringElement(shape, size)
+            frame = cv2.dilate(color, kernel)
+            pass
+
+        elif self.all_filters['prewitt']:
+            img_gaussian = cv2.GaussianBlur(gray, (3, 3), 0)
+            kernelx = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
+            kernely = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
+            img_prewittx = cv2.filter2D(img_gaussian, -1, kernelx)
+            img_prewitty = cv2.filter2D(img_gaussian, -1, kernely)
+            frame = img_prewittx + img_prewitty
+            pass
+
+        elif self.all_filters['histogramEqualization']:
+            frame = cv2.equalizeHist(gray)
+            pass
+
         if ret:
             self.frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
             self.photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(self.frame))
