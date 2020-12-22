@@ -1,8 +1,4 @@
-import tkinter
 import tkinter.filedialog
-import cv2
-import PIL.Image
-import PIL.ImageTk
 import time
 import os
 from video_capture import *
@@ -86,7 +82,7 @@ class App:
         self.b10.grid(row=9, column=17)
 
         self.b11 = tkinter.Button(window, text="Unsharp", width=15, command=self.unsharp_filter)
-        self.b11.grid(row=10, column=13)
+        self.b11.grid(row=13, column=13)
 
         self.b12 = tkinter.Button(window, text="LogTrans...", width=15, command=self.logTransformation)
         self.b12.grid(row=10, column=17)
@@ -97,20 +93,23 @@ class App:
         self.b14 = tkinter.Button(window, text="Min filter", width=15, command=self.min_filter)
         self.b14.grid(row=12, column=13)
 
-        self.b14 = tkinter.Button(window, text="Max filter", width=15, command=self.max_filter)
-        self.b14.grid(row=12, column=17)
+        self.b15 = tkinter.Button(window, text="Max filter", width=15, command=self.max_filter)
+        self.b15.grid(row=12, column=17)
 
-        self.b14 = tkinter.Button(window, text="Prewitt", width=15, command=self.prewitt_filter)
-        self.b14.grid(row=11, column=17)
+        self.b16 = tkinter.Button(window, text="Prewitt", width=15, command=self.prewitt_filter)
+        self.b16.grid(row=11, column=17)
 
-        self.b14 = tkinter.Button(window, text="Histogram Equalization", width=15, command=self.histogram_filter)
-        self.b14.grid(row=13, column=17, columnspan=2)
+        self.b17 = tkinter.Button(window, text="Histogram Equaliz...", width=15, command=self.histogram_filter)
+        self.b17.grid(row=13, column=17, columnspan=2)
 
-        self.b15 = tkinter.Button(window, text="Snap or Save image", width=15, command=self.snapshot)
-        self.b15.grid(row=15, rowspan=2, column=13, columnspan=4)
+        self.b18 = tkinter.Button(window, text="Power Low 0.5g", width=15, command=self.powerLowEnhancement)
+        self.b18.grid(row=10, column=13, columnspan=2)
 
-        self.b16 = tkinter.Button(window, text="Close Program", command=window.destroy)
-        self.b16.grid(row=15, rowspan=2, column=17, columnspan=2)
+        self.b19 = tkinter.Button(window, text="Snap or Save image", width=15, command=self.snapshot)
+        self.b19.grid(row=15, rowspan=2, column=13, columnspan=4)
+
+        self.b20 = tkinter.Button(window, text="Close Program", command=window.destroy)
+        self.b20.grid(row=15, rowspan=2, column=17, columnspan=2)
 
         # After	it is called once, the update method will be automatically called every loop
         self.delay = 15
@@ -272,6 +271,7 @@ class App:
             self.img.update()
         elif self.isVideoInstantiated:
             self.vid.all_filters = select_filter('histogramEqualization', True)
+
 
 # Create a window and pass it to the Application object
 App(tkinter.Tk(), 'Filterawy')
