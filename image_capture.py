@@ -82,8 +82,7 @@ class ImageCap:
                 self.update_panel(self.original_image, self.filtered_image)
 
             elif self.all_filters['threshold']:
-                self.filtered_image = cv2.threshold(cv2.absdiff(self.filtered_image, gray), 30, 255, cv2.THRESH_BINARY)[
-                    1]
+                self.filtered_image = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)[1]
                 self.update_panel(self.original_image, self.filtered_image)
 
             elif self.all_filters['median']:
