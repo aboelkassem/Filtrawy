@@ -113,6 +113,7 @@ class App:
 
         # After	it is called once, the update method will be automatically called every loop
         self.delay = 15
+        self.window.tk.call('wm', 'iconphoto', self.window._w, tkinter.PhotoImage(file='test-images/icon.png'))
         self.window.mainloop()
 
     def select_video(self):

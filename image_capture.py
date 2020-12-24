@@ -119,15 +119,15 @@ class ImageCap:
                 self.update_panel(self.original_image, self.filtered_image)
 
             elif self.all_filters['increaseContrast']:
-                alpha = random.uniform(1.0, 3.0)
-                beta = random.uniform(0, 100)
+                alpha = random.uniform(1.0, 2.0)
+                beta = random.uniform(0, 80)
                 self.filtered_image = cv2.addWeighted(self.original_image, alpha,
                                                       np.zeros(self.original_image.shape, self.original_image.dtype), 0,
                                                       beta)
                 self.update_panel(self.original_image, self.filtered_image)
 
             elif self.all_filters['decreaseContrast']:
-                alpha = random.uniform(1.0, 3.0)
+                alpha = random.uniform(1.0, 0.8)
                 beta = random.uniform(-100, 0)
                 self.filtered_image = cv2.addWeighted(self.original_image, alpha,
                                                       np.zeros(self.original_image.shape, self.original_image.dtype), 0,
